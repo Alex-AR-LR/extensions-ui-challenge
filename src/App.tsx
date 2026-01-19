@@ -1,10 +1,13 @@
-import { Header } from "./components";
+import { Header } from './components';
+import { Wrapper } from './components/layout/Wrapper';
 
 function App() {
   return (
-    <>
-      <Header />
-    </>
+    <div className="min-h-screen bg-neutral-200">
+      <Wrapper>
+        <Header />
+      </Wrapper>
+    </div>
   );
 }
 
