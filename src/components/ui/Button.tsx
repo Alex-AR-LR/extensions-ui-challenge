@@ -4,13 +4,17 @@ import type React from 'react';
 
 const button = cva(
   [
-    'cursor-pointer hover:outline-2 hover:outline-red-700 rounded-lg inline-flex items-center justify-center p-1 dark:bg-neutral-700'
+    'cursor-pointer rounded-lg inline-flex items-center justify-center p-1 focus:outline-2 focus:outline-offset-2 focus:outline-red-700'
   ],
   {
     variants: {
       color: {
-        primary: ['bg-transparent'],
-        secondary: ['bg-neutral-100']
+        primary: ['bg-neutral-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 hover:bg-neutral-300'],
+        secondary: ['bg-neutral-0 text-neutral-900 hover:opacity-65 dark:bg-neutral-800 dark:text-neutral-0 dark:hover:opacity-100 dark:hover:bg-neutral-600']
+      },
+      state:{
+        active: ['bg-red-500 text-neutral-0 dark:bg-red-600 dark:text-neutral-800 '],
+        inactive: ['bg-neutral-100 dark:bg-neutral-700 dark:hover:bg-neutral-600 hover:bg-neutral-300']
       },
       size: {
         small: ['min-w-12 min-h-12']
@@ -45,11 +49,12 @@ export const Button = ({
   size,
   radius,
   icon,
+  state,
   ...props
 }: ButtonProps) => {
   return (
     <button
-      className={twMerge(button({ color, size, radius, className }))}
+      className={twMerge(button({ color, size,state, radius, className }))}
       {...props}
     >
       {icon && icon}

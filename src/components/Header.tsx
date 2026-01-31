@@ -15,13 +15,19 @@ export const Header = ({ currentFilter, onFilterChange }: HeaderProps) => {
     return currentFilter === filter ? 'primary' : 'secondary';
   };
 
+  const filterOptions: { label: string; value: FilterType }[] = [
+    { label: 'All', value: 'all' },
+    { label: 'Active', value: 'active' },
+    { label: 'Inactive', value: 'inactive' },
+  ];
+
   return (
     <header className="space-y-10">
       <div className="bg-neutral-0 flex h-16 items-center justify-between rounded-md px-3 shadow-md dark:bg-neutral-800">
         {darkMode ? <Logo lettersColor="fill-neutral-0" /> : <Logo />}
         <Button
           onClick={toggleTheme}
-          color="secondary"
+          color="primary"
           size={'small'}
           radius={'lg'}
           icon={darkMode ? <Sun /> : <Moon />}
@@ -32,33 +38,19 @@ export const Header = ({ currentFilter, onFilterChange }: HeaderProps) => {
           Extensions List
         </h1>
         <div className="flex justify-around">
-          <Button
-            className="px-5 text-xl font-medium"
-            radius={'full'}
-            color={getButtonColor('all')}
-            size={'small'}
-            onClick={() => onFilterChange('all')}
-          >
-            All
-          </Button>
-          <Button
-            className="px-5 text-xl font-medium"
-            radius={'full'}
-            color={getButtonColor('active')}
-            size={'small'}
-            onClick={() => onFilterChange('active')}
-          >
-            Active
-          </Button>
-          <Button
-            className="px-5 text-xl font-medium"
-            radius={'full'}
-            color={getButtonColor('inactive')}
-            size={'small'}
-            onClick={() => onFilterChange('inactive')}
-          >
-            Inactive
-          </Button>
+          {filterOptions.map((filterOption) => (
+            <Button
+              key={filterOption.value}
+              className="px-5 text-xl font-medium shadow-sm"
+              radius={'full'}
+              state={'active'}
+              color={getButtonColor(filterOption.value)}
+              size={'small'}
+              onClick={() => onFilterChange(filterOption.value)}
+            >
+              {filterOption.label}
+            </Button>
+          ))}
         </div>
       </div>
     </header>
